@@ -21,7 +21,8 @@ class UrlObject(models.Model):
     )
     short_path = models.CharField(
         max_length=5,
-        null=False
+        null=False,
+        unique=True
     )
     added = models.DateTimeField(
         auto_now_add=True
