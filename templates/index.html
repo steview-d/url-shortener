@@ -6,6 +6,10 @@
 
 {% include 'components/nav.html' %}
 
+<form method="POST">
+{% csrf_token %}
 {{ url_form }}
+<input type="submit" value="Shorten URL" name="shorten-url-form" class="">
+</form>
 
 {% endblock %}
