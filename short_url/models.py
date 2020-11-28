@@ -1,3 +1,43 @@
+from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-# Create your models here.
+
+User = settings.AUTH_USER_MODEL
+
+
+class UrlObject(models.Model):
+    """A single url"""
+
+    user = models.ForeignKey(
+        User,
+        default=2,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
+    )
+    long_url = models.URLField(
+        null=False,
+        blank=False
+    )
+    short_path = models.CharField(
+        max_length=5,
+        null=False
+    )
+    added = models.DateTimeField(
+        auto_now_add=True
+    )
+    clicks = models.PositiveIntegerField(
+        default=0,
+        null=False
+    )
+    tags = ArrayField(
+        models.CharField(max_length=15),
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+
+        def __str__(self):
+            return self.long_url
