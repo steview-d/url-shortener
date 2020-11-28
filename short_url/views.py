@@ -1,5 +1,13 @@
 from django.shortcuts import render
 
+from .forms import UrlObjectForm
+
 
 def index(request):
-    return render(request, "index.html")
+    """Front page"""
+
+    url_form = UrlObjectForm()
+
+    context = {'url_form': url_form, }
+
+    return render(request, "index.html", context)
