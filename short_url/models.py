@@ -11,7 +11,6 @@ class UrlObject(models.Model):
 
     user = models.ForeignKey(
         User,
-        default=2,
         null=True,
         blank=True,
         on_delete=models.CASCADE
