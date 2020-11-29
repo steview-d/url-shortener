@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect, render
 
 from .forms import UrlObjectForm
+from .models import UrlObject
 
 import random
 import string
@@ -22,6 +24,9 @@ def index(request):
             chars = string.ascii_lowercase + string.digits
             form.short_path = ''.join((random.choice(chars) for i in range(5)))
 
+            # need to add check to ignore paths in use
+            # and already created short_paths
+
             form.save()
         else:
             url_form = form
@@ -29,3 +34,14 @@ def index(request):
     context = {'url_form': url_form, }
 
     return render(request, "index.html", context)
+
+
+def url_redirect(request, short_url):
+    """Redirect to actual url"""
+
+    try:
+        redirect_to = UrlObject.objects.get(short_path=short_url)
+    except ObjectDoesNotExist:
+        return redirect('index')
+
+    return redirect(redirect_to.long_url)

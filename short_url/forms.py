@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.postgres.forms import SimpleArrayField
 
 from .models import UrlObject
 
