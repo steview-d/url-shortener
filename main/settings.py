@@ -144,4 +144,4 @@ STATICFILES_DIRS = (
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-URL_DOMAIN = os.environ.get('URL_DOMAIN')
+APP_DOMAIN = os.environ.get('APP_DOMAIN')

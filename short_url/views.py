@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render
 
@@ -31,7 +32,14 @@ def index(request):
         else:
             url_form = form
 
-    context = {'url_form': url_form, }
+    # Create list of public short urls
+    public_urls = UrlObject.objects.filter(user=1).order_by('-added')[:10]
+
+    print(public_urls)
+
+    context = {'url_form': url_form,
+               'public_urls': public_urls,
+               'app_domain': settings.APP_DOMAIN, }
 
     return render(request, "index.html", context)
 
