@@ -11,8 +11,8 @@ class UrlObject(models.Model):
 
     user = models.ForeignKey(
         User,
-        null=True,
-        blank=True,
+        default=1,
+        null=False,
         on_delete=models.CASCADE
     )
     long_url = models.URLField(
