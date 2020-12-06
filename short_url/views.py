@@ -13,7 +13,7 @@ def index(request):
     """Main page"""
 
     # Initialise specific form depending if a user is logged in
-    url_form = UrlObjectForm
+    url_form = UrlObjectForm(initial={'long_url': 'https://'})
 
     if 'shorten-url-form' in request.POST:
         form = UrlObjectForm(request.POST)
@@ -36,14 +36,17 @@ def index(request):
 
     # get list of urls to display
     if request.user.is_authenticated:
+        url_title = 'Your Urls'
         url_list = UrlObject.objects.filter(
             user=request.user).order_by('-added')[:10]
-        print(url_list)
+
     else:
+        url_title = 'Public Urls'
         url_list = UrlObject.objects.filter(
             public=True).order_by('-added')[:10]
 
     context = {'url_form': url_form,
+               'url_title': url_title,
                'url_list': url_list,
                'app_domain': settings.APP_DOMAIN, }
 

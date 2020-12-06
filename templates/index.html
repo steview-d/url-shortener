@@ -8,18 +8,44 @@
 
 {% include 'components/nav.html' %}
 
-<form method="POST" novalidate>
-{% csrf_token %}
-{{ url_form|crispy }}
-<input type="submit" value="Shorten URL" name="shorten-url-form">
-</form>
+<div class="container form-outer">
+   <div class="row">
+      <form method="POST" class="form-inline" novalidate>
+         {% csrf_token %}
+         {{ url_form|crispy }}
+         <input type="submit" value="Shorten URL" name="shorten-url-form" class="submit-button">
+      </form>
+   </div>
+</div>
 
-<h2>URLS</h2>
 
-<ul>
-{% for u in url_list %}
-   <li><a href="{{ u.short_path }}">{{ app_domain }}{{ u.short_path }}</a> - {{ u.long_url }}</li>
-{% endfor %}
-</ul>
+
+<h2>{{ url_title }}</h2>
+
+
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <th scope="col">Short Url</th>
+         <th scope="col">Full Url</th>
+         {% if url_title == 'Your Urls' %}
+         <th scope="col">Visibility</th>
+         {% endif %}
+         <th scope="col">Clicks</th>
+      </tr>
+   </thead>
+   <tbody>
+      {% for u in url_list %}
+      <tr>
+         <td><a href="{{ u.short_path }}">{{ app_domain }}{{ u.short_path }}</a></td>
+         <td><a href="{{ u.long_url }}">{{ u.long_url }}</a></td>
+         {% if url_title == 'Your Urls' %}
+         <td>{% if u.public %}Public{% else %}Private{% endif %}</td>
+         {% endif %}
+         <td>{{ u.clicks }}</td>
+      </tr>
+      {% endfor %}
+   </tbody>
+</table>
 
 {% endblock %}

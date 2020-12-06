@@ -1,0 +1,52 @@
+.form-outer {
+  margin: 40px auto;
+
+  form {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    background-color: white;
+	border: 1px solid #ccc;
+	margin: auto;
+
+    label {
+      display: none;
+    }
+
+    #div_id_long_url {
+	  flex: 1 0 auto;
+	  margin-bottom: 0;
+
+	  div {
+		  width: 100%;
+	  }
+
+      input {
+        font-size: 16px;
+        line-height: 24px;
+		border-radius: 0;
+		width: 100%;
+
+		@media screen and (max-width:767px) {
+			line-height: 30px;
+		}
+      }
+    }
+
+    .submit-button {
+      flex: 0 1 auto;
+      background-color: #ccc;
+      border: none;
+	  padding: 7px 20px;
+
+	  @media screen and (max-width:767px) {
+		  width:100%;
+		  padding: 8px 20px;
+	  }
+    }
+  }
+}
+
+.asteriskField {
+  display: none;
+}
