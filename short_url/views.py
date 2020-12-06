@@ -32,13 +32,19 @@ def index(request):
         else:
             url_form = form
 
-    # Create list of public short urls
-    public_urls = UrlObject.objects.filter(public=True).order_by('-added')[:10]
+    url_list = []
 
-    print(public_urls)
+    # get list of urls to display
+    if request.user.is_authenticated:
+        url_list = UrlObject.objects.filter(
+            user=request.user).order_by('-added')[:10]
+        print(url_list)
+    else:
+        url_list = UrlObject.objects.filter(
+            public=True).order_by('-added')[:10]
 
     context = {'url_form': url_form,
-               'public_urls': public_urls,
+               'url_list': url_list,
                'app_domain': settings.APP_DOMAIN, }
 
     return render(request, "index.html", context)

@@ -14,10 +14,10 @@
 <input type="submit" value="Shorten URL" name="shorten-url-form">
 </form>
 
-<h2>Public URLS</h2>
+<h2>URLS</h2>
 
 <ul>
-{% for u in public_urls %}
+{% for u in url_list %}
    <li><a href="{{ u.short_path }}">{{ app_domain }}{{ u.short_path }}</a> - {{ u.long_url }}</li>
 {% endfor %}
 </ul>
