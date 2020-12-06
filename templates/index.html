@@ -18,7 +18,7 @@
 
 <ul>
 {% for u in public_urls %}
-   <li><a href="{{ u.long_url }}">{{ app_domain }}{{ u.short_path }}</a> - {{ u.long_url }}</li>
+   <li><a href="{{ u.short_path }}">{{ app_domain }}{{ u.short_path }}</a> - {{ u.long_url }}</li>
 {% endfor %}
 </ul>
 

@@ -52,4 +52,10 @@ def url_redirect(request, short_url):
     except ObjectDoesNotExist:
         return redirect('index')
 
+    u = UrlObject.objects.get(
+        short_path=short_url
+    )
+    u.clicks += 1
+    u.save()
+
     return redirect(redirect_to.long_url)
