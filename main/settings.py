@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     # project apps
     'short_url',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,14 @@ STATICFILES_DIRS = (
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 APP_DOMAIN = os.environ.get('APP_DOMAIN')
+
+# for use with auth_views.LoginView
+LOGIN_REDIRECT_URL = 'index'
+
+# SMTP config
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_ADDRESS")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'PW Reset <noreply>'

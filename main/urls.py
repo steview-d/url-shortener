@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from short_url.views import index, url_redirect
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
+    # paths for accounts
+    path('accounts/', include('accounts.urls')),
+    # all other paths for short urls
     path('<short_url>', url_redirect, name='url_redirect')
 ]

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block page_title %}Log In{% endblock %}
+
+{% block content %}
+
+{% include 'components/nav.html' %}
+<h4>Log In To Your Account</h4>
+<form method="POST" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <div class="pw-reset">
+        <small><a href="{% url 'password_reset' %}">Forgot Your Password?</a></small>
+    </div>
+
+    <div>
+        <button class="btn--standard" type="submit">Login</button></div>
+    <div>
+        <small>Need an account? Create one <a href="{% url 'register' %}" class="label label-small">here</a></small>
+    </div>
+</form>
+
+{% endblock %}
