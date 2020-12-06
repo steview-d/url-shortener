@@ -27,6 +27,9 @@ class UrlObject(models.Model):
     added = models.DateTimeField(
         auto_now_add=True
     )
+    public = models.BooleanField(
+        default=True
+    )
     clicks = models.PositiveIntegerField(
         default=0,
         null=False

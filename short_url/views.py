@@ -33,7 +33,7 @@ def index(request):
             url_form = form
 
     # Create list of public short urls
-    public_urls = UrlObject.objects.filter(user=1).order_by('-added')[:10]
+    public_urls = UrlObject.objects.filter(public=True).order_by('-added')[:10]
 
     print(public_urls)
 
